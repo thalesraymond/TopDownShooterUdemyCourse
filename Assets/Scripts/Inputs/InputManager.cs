@@ -47,7 +47,7 @@ namespace Inputs
         {
             this.PlayerMovementValue = this.Controls.Player.Movement.ReadValue<Vector2>();
         
-            this.IsTryingToMove = this.PlayerMovementValue != Vector2.zero;
+            this.IsTryingToMove = this.PlayerMovementValue.magnitude > 0;
         }
         
         private void HandleAim()
