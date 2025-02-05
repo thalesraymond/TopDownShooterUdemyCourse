@@ -9,9 +9,14 @@ namespace PlayerPartials
     {
         public CharacterController CharacterController { get; private set; }
         
+        [Header("Movement")]
         [SerializeField] public float movementSpeed = 5f;
-        
         [SerializeField] public float gravityScale = 9.81f;
+        
+        [Header("Aiming")]
+        [SerializeField] public LayerMask aimLayerMask;
+
+        [SerializeField] private Transform aimCrosshair;
 
         private void Awake()
         {
@@ -34,6 +39,11 @@ namespace PlayerPartials
         private void Update()
         {
             this.StateMachine.CurrentState.Update();
+        }
+        
+        public void UpdateAimCrosshairPosition(Vector3 position)
+        {
+            this.aimCrosshair.position = position;
         }
     }
 }
