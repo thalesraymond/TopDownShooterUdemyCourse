@@ -7,7 +7,10 @@ namespace PlayerPartials
 {
     public partial class Player : Entity
     {
+        private static readonly int XVelocity = Animator.StringToHash("xVelocity");
+        private static readonly int ZVelocity = Animator.StringToHash("zVelocity");
         public CharacterController CharacterController { get; private set; }
+        private Animator _animator;
         
         [Header("Movement")]
         [SerializeField] public float movementSpeed = 5f;
@@ -34,6 +37,8 @@ namespace PlayerPartials
             this.StateMachine.Initialize(this.IdleState);
         
             InputManager.Instance.Controls.Player.Fire.performed += _ => Debug.Log("FIRE PRESSED");
+            
+            this._animator = GetComponentInChildren<Animator>();
         }
 
         private void Update()
@@ -44,6 +49,13 @@ namespace PlayerPartials
         public void UpdateAimCrosshairPosition(Vector3 position)
         {
             this.aimCrosshair.position = position;
+        }
+
+        public void SetAnimatorVelocity(float xVelocity, float zVelocity)
+        {   
+            this._animator.SetFloat(XVelocity, xVelocity, .1f, Time.deltaTime);
+            
+            this._animator.SetFloat(ZVelocity, zVelocity, .1f, Time.deltaTime);
         }
     }
 }

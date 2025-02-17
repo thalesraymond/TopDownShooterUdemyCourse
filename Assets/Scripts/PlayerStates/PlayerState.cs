@@ -41,6 +41,8 @@ namespace PlayerStates
             this.ApplyGravity();
 
             this.DoPlayerAim();
+            
+            this.UpdateAnimator();
         }
 
         private void DoPlayerAim()
@@ -64,6 +66,16 @@ namespace PlayerStates
                 return;
             
             this.Player.CharacterController.Move(Vector3.down * (this.Player.gravityScale * Time.deltaTime));
+        }
+
+        private void UpdateAnimator()
+        {
+            var playerMovementVector3 = new Vector3(this.PlayerMovementValue.x, 0, this.PlayerMovementValue.y);
+            
+            var xVelocity = Vector3.Dot(playerMovementVector3, this.Player.transform.right);
+            var zVelocity = Vector3.Dot(playerMovementVector3, this.Player.transform.forward);
+            
+            this.Player.SetAnimatorVelocity(xVelocity, zVelocity);
         }
     }
 }
