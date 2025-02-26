@@ -16,10 +16,6 @@ namespace PlayerStates
             base.Enter();
             
             this.Player.ToggleRunningAnimation(true);
-            
-            // increase player speed by 20%
-            
-            
         }
 
         public override void Exit()
