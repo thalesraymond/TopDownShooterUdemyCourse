@@ -7,6 +7,7 @@ namespace PlayerPartials
     {
         public PlayerStateMachine StateMachine { get; private set; }
         public PlayerIdleState IdleState { get; private set; }
-        public PlayerMoveState MoveState { get; private set; }
+        public PlayerWalkState WalkState { get; private set; }
+        public PlayerRunningState RunningState { get; private set; }
     }
 }

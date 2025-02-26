@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace PlayerStates
 {
-    public class PlayerMoveState : PlayerState
+    public class PlayerWalkState : PlayerState
     {
         private CharacterController _characterController;
-        public PlayerMoveState(Player player, PlayerStateMachine stateMachine) : base(player, stateMachine)
+        public PlayerWalkState(Player player, PlayerStateMachine stateMachine) : base(player, stateMachine)
         {
         }
 
@@ -31,7 +31,13 @@ namespace PlayerStates
                 return;
             }
             
-            var movementDirection = new Vector3(InputManager.Instance.PlayerMovementValue.x, 0, InputManager.Instance.PlayerMovementValue.y) * (this.Player.movementSpeed * Time.deltaTime);
+            if (InputManager.Instance.IsTryingToRun)
+            {
+                this.StateMachine.ChangeState(this.Player.RunningState);
+                return;
+            }
+            
+            var movementDirection = new Vector3(InputManager.Instance.PlayerMovementValue.x, 0, InputManager.Instance.PlayerMovementValue.y) * (this.Player.WalkMovementSpeed * Time.deltaTime);
 
             this.Player.CharacterController.Move(movementDirection);
         }

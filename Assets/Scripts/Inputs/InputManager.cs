@@ -10,6 +10,8 @@ namespace Inputs
         public Vector2 PlayerMovementValue { get; private set; }
 
         public bool IsTryingToMove { get; private set; }
+        
+        public bool IsTryingToRun { get; private set; }
 
         public Vector2 PlayerAimValue { get; private set; }
 
@@ -49,6 +51,8 @@ namespace Inputs
             this.PlayerMovementValue = this.Controls.Player.Movement.ReadValue<Vector2>();
 
             this.IsTryingToMove = this.PlayerMovementValue.magnitude > 0;
+            
+            this.IsTryingToRun = this.Controls.Player.Run.IsPressed();
         }
 
         private void HandleAim()

@@ -1,5 +1,6 @@
 ﻿using Inputs;
 using PlayerPartials;
+using UnityEngine;
 
 namespace PlayerStates
 {
@@ -17,9 +18,18 @@ namespace PlayerStates
         public override void Update()
         {
             base.Update();
+            
+            if (!InputManager.Instance.IsTryingToMove)
+                return;
 
-            if (InputManager.Instance.IsTryingToMove)
-                this.StateMachine.ChangeState(this.Player.MoveState);
+            if (InputManager.Instance.IsTryingToRun)
+            {
+                this.StateMachine.ChangeState(this.Player.RunningState);
+                return;
+            }
+            
+            this.StateMachine.ChangeState(this.Player.WalkState);
+            
         }
     }
 }

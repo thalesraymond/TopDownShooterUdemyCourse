@@ -9,12 +9,17 @@ namespace PlayerPartials
     {
         private static readonly int XVelocity = Animator.StringToHash("xVelocity");
         private static readonly int ZVelocity = Animator.StringToHash("zVelocity");
+        private static readonly int IsRunning = Animator.StringToHash("isRunning");
         public CharacterController CharacterController { get; private set; }
         private Animator _animator;
         
         [Header("Movement")]
-        [SerializeField] public float movementSpeed = 5f;
+        [SerializeField] private float movementSpeed = 5f;
         [SerializeField] public float gravityScale = 9.81f;
+
+        public float WalkMovementSpeed => this.movementSpeed;
+        
+        public float RunMovementSpeed => this.movementSpeed * 2f;
         
         [Header("Aiming")]
         [SerializeField] public LayerMask aimLayerMask;
@@ -27,7 +32,9 @@ namespace PlayerPartials
 
             this.IdleState = new PlayerIdleState(this, this.StateMachine);
 
-            this.MoveState = new PlayerMoveState(this, this.StateMachine);
+            this.WalkState = new PlayerWalkState(this, this.StateMachine);
+            
+            this.RunningState = new PlayerRunningState(this, this.StateMachine);
         }
 
         private void Start()
@@ -56,6 +63,11 @@ namespace PlayerPartials
             this._animator.SetFloat(XVelocity, xVelocity, .1f, Time.deltaTime);
             
             this._animator.SetFloat(ZVelocity, zVelocity, .1f, Time.deltaTime);
+        }
+        
+        public void ToggleRunningAnimation(bool isRunning)
+        {
+            this._animator.SetBool(IsRunning, isRunning);
         }
     }
 }
