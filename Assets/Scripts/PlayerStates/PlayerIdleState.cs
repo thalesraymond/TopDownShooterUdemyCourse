@@ -1,35 +1,24 @@
-﻿using Inputs;
-using PlayerPartials;
-using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using Inputs;
 
 namespace PlayerStates
 {
     public class PlayerIdleState : PlayerState
     {
-        public PlayerIdleState(Player player, PlayerStateMachine stateMachine) : base(player, stateMachine)
+        public PlayerIdleState(Player player) : base(player)
         {
         }
 
-        public override void Enter()
+        protected override List<Type> ConflictingStates => new()
         {
-            base.Enter();
-        }
-
-        public override void Update()
+            typeof(PlayerWalkState), 
+            typeof(PlayerRunningState)
+        };
+        
+        public override bool CanActivate()
         {
-            base.Update();
-            
-            if (!InputManager.Instance.IsTryingToMove)
-                return;
-
-            if (InputManager.Instance.IsTryingToRun)
-            {
-                this.StateMachine.ChangeState(this.Player.RunningState);
-                return;
-            }
-            
-            this.StateMachine.ChangeState(this.Player.WalkState);
-            
+            return !InputManager.Instance.IsTryingToMove && !InputManager.Instance.IsTryingToRun;
         }
     }
 }
