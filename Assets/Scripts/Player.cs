@@ -32,7 +32,9 @@ public class Player : Entity
             new PlayerIdleState(this), 
             new PlayerRunningState(this), 
             new PlayerWalkState(this),
-            new PlayerShootingState(this)
+            new PlayerShootingState(this),
+            new PlayerAimingState(this),
+            new PlayerFallingState(this)
             );
     }
 
@@ -67,8 +69,6 @@ public class Player : Entity
         
     public void TriggerFiringAnimation()
     {
-        //check if the animation Auto Rifle Fire is playing before triggering
-        
         if (this._animator.GetCurrentAnimatorStateInfo(1).IsName("Auto Rifle Fire"))
             return;
         
