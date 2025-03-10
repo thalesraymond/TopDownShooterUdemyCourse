@@ -1,27 +1,32 @@
-﻿using Inputs;
-using PlayerPartials;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Inputs;
 using UnityEngine;
 
 namespace PlayerStates
 {
-    public class PlayerState
+    public abstract class PlayerState
     {
-        protected PlayerStateMachine StateMachine;
-
-        protected Player Player;
+        protected PlayerState(Player player)
+        {
+            this.Player = player;
+        }
+        
+        protected abstract List<System.Type> ConflictingStates { get; }
+        
+        public abstract bool CanActivate();
+        
+        public bool HasConflictWith(HashSet<PlayerState> activeStates)
+        {
+            return activeStates.Any(state => ConflictingStates.Contains(state.GetType()));
+        }
+        protected readonly Player Player;
         
         protected Vector2 PlayerAimValue { get; private set; }
 
         protected Vector2 PlayerMovementValue { get; private set; }
 
         protected Vector3 AimDirection;
-
-        public PlayerState(Player player, PlayerStateMachine stateMachine)
-        {
-            this.Player = player;
-
-            this.StateMachine = stateMachine;
-        }
 
         public virtual void Enter()
         {
@@ -77,5 +82,7 @@ namespace PlayerStates
             
             this.Player.SetAnimatorVelocity(xVelocity, zVelocity);
         }
+        
+        
     }
 }

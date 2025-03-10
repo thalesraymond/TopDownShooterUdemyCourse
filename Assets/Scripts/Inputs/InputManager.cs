@@ -12,6 +12,8 @@ namespace Inputs
         public bool IsTryingToMove { get; private set; }
         
         public bool IsTryingToRun { get; private set; }
+        
+        public bool IsTryingToShoot { get; private set; }
 
         public Vector2 PlayerAimValue { get; private set; }
 
@@ -44,6 +46,8 @@ namespace Inputs
             this.HandleMovement();
 
             this.HandleAim();
+            
+            this.HandleFiring();
         }
 
         private void HandleMovement()
@@ -58,6 +62,11 @@ namespace Inputs
         private void HandleAim()
         {
             this.PlayerAimValue = this.Controls.Player.Aim.ReadValue<Vector2>();
+        }
+
+        private void HandleFiring()
+        {
+            this.IsTryingToShoot = this.Controls.Player.Fire.IsPressed();
         }
     }
 }

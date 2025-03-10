@@ -1,5 +1,6 @@
-﻿using Inputs;
-using PlayerPartials;
+﻿using System;
+using System.Collections.Generic;
+using Inputs;
 using UnityEngine;
 
 namespace PlayerStates
@@ -7,8 +8,20 @@ namespace PlayerStates
     public class PlayerRunningState : PlayerState
     {
         private CharacterController _characterController;
-        public PlayerRunningState(Player player, PlayerStateMachine stateMachine) : base(player, stateMachine)
+        
+        public PlayerRunningState(Player player) : base(player)
         {
+        }
+
+        protected override List<Type> ConflictingStates => new()
+        {
+            typeof(PlayerWalkState),
+            typeof(PlayerIdleState)
+        };
+        
+        public override bool CanActivate()
+        {
+            return InputManager.Instance.IsTryingToRun && InputManager.Instance.IsTryingToMove;
         }
 
         public override void Enter()
@@ -28,13 +41,6 @@ namespace PlayerStates
         public override void Update()
         {
             base.Update();
-
-            if (!InputManager.Instance.IsTryingToRun || !InputManager.Instance.IsTryingToMove)
-            {
-                this.StateMachine.ChangeState(this.Player.IdleState);
-                
-                return;
-            }
             
             var movementDirection = new Vector3(InputManager.Instance.PlayerMovementValue.x, 0, InputManager.Instance.PlayerMovementValue.y) * (this.Player.RunMovementSpeed * Time.deltaTime);
 
