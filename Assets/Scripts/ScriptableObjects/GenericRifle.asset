@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d69b8647c37347f38e5568868d7df7fb, type: 3}
+  m_Name: GenericRifle
+  m_EditorClassIdentifier: 
+  Name: Generic Rifle
+  Icon: {fileID: 0}
+  Description: A generic rifle
+  Price: 1000
+  Damage: 5
+  FireRate: 20
+  Range: 1000
+  MagazineSize: 50
+  MaxAmmo: 500
+  ReloadTime: 5
+  Recoil: 20
+  Spread: 5
+  Accuracy: 90
+  IsAutomatic: 1

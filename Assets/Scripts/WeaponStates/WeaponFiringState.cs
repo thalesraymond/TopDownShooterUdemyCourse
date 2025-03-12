@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using Inputs;
-using UnityEngine;
+using PlayerStates;
 
-namespace PlayerStates
+namespace WeaponStates
 {
-    public class PlayerShootingState : PlayerState
+    public class WeaponFiringState : WeaponState
     {
-        public PlayerShootingState(Player player) : base(player)
+        public WeaponFiringState(Player player) : base(player)
         {
         }
 
-        protected override List<Type> ConflictingStates => new();
-
+        protected override List<Type> ConflictingStates { get; }
         public override bool CanActivate()
         {
             return InputManager.Instance.IsTryingToShoot && this.Player.CurrentWeapon.CanShoot();
@@ -22,7 +21,8 @@ namespace PlayerStates
         {
             base.Update();
             
-            this.Player.TriggerFiringAnimation();
+            this.Player.CurrentWeapon.Fire();
+            
         }
     }
 }
