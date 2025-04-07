@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Inputs
 {
@@ -16,6 +18,8 @@ namespace Inputs
         public bool IsTryingToShoot { get; private set; }
 
         public Vector2 PlayerAimValue { get; private set; }
+        
+        public Action<string> SwitchCurrentWeaponAction { get; set; }
 
         private void Awake()
         {
@@ -29,6 +33,8 @@ namespace Inputs
             }
 
             this.Controls = new Controls();
+
+            this.Controls.Player.SwitchWeapon.performed += context => this.SwitchCurrentWeapon(context);
         }
 
         private void OnEnable()
@@ -48,6 +54,11 @@ namespace Inputs
             this.HandleAim();
             
             this.HandleFiring();
+        }
+
+        private void SwitchCurrentWeapon(InputAction.CallbackContext context)
+        {
+            this.SwitchCurrentWeaponAction(context.control.name);
         }
 
         private void HandleMovement()

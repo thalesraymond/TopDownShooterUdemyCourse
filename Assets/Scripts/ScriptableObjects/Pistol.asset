@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d69b8647c37347f38e5568868d7df7fb, type: 3}
-  m_Name: GenericRifle
+  m_Name: Pistol
   m_EditorClassIdentifier: 
-  Name: Generic Rifle
+  Name: Pistol
   Icon: {fileID: 0}
-  Description: A generic rifle
-  Price: 1000
-  Damage: 5
-  FireRate: 20
-  Range: 1000
-  MagazineSize: 50
-  MaxAmmo: 500
-  ReloadTime: 5
-  Recoil: 20
-  Spread: 5
-  Accuracy: 90
-  IsAutomatic: 1
-  Keybind: 
+  Description: A generic pistol
+  Price: 500
+  Damage: 10
+  FireRate: 1
+  Range: 100
+  MagazineSize: 20
+  MaxAmmo: 200
+  ReloadTime: 10
+  Recoil: 5
+  Spread: 1
+  Accuracy: 100
+  IsAutomatic: 0
+  Keybind: 1

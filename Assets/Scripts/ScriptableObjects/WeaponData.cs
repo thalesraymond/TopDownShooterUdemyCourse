@@ -15,6 +15,7 @@ namespace ScriptableObjects
         public float Spread;
         public float Accuracy;
         public bool IsAutomatic;
-        
+        public string Keybind;
+
     }
 }

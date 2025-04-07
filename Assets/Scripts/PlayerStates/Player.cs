@@ -1,4 +1,6 @@
-﻿using ScriptableObjects;
+﻿using Inputs;
+using ScriptableObjects;
+using Unity.VisualScripting;
 using UnityEngine;
 using WeaponStates;
 
@@ -19,6 +21,8 @@ namespace PlayerStates
 
         [Header("Weapons")] 
         [SerializeField] private Weapon currentWeapon;
+
+        [SerializeField] private GameObject weaponGroup;
         
         public Weapon CurrentWeapon => this.currentWeapon;
 
@@ -50,6 +54,15 @@ namespace PlayerStates
             this.CharacterController = GetComponent<CharacterController>();
             
             this._animator = GetComponentInChildren<Animator>();
+
+            foreach (Transform children in this.weaponGroup.transform)
+            {   
+                children.gameObject.SetActive(false);
+            }
+            
+            this.currentWeapon.gameObject.SetActive(true);
+            
+            InputManager.Instance.SwitchCurrentWeaponAction += this.SwitchWeapon;
         }
 
         private void Update()
@@ -80,6 +93,21 @@ namespace PlayerStates
                 return;
         
             this._animator.SetTrigger(IsFiring);
+        }
+
+        private void SwitchWeapon(string weaponKey)
+        {
+            foreach (Transform weapon in this.weaponGroup.transform)
+            {
+                weapon.gameObject.SetActive(false);
+                
+                var weaponEntity = weapon.gameObject.GetComponent<Weapon>();
+
+                if (weaponEntity.WeaponData.Keybind != weaponKey) continue;
+                
+                this.currentWeapon = weaponEntity;
+                this.currentWeapon.gameObject.SetActive(true);
+            }
         }
     }
 }
