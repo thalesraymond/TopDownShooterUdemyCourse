@@ -894,6 +894,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &993738159
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 993738160}
+  - component: {fileID: 993738161}
+  m_Layer: 0
+  m_Name: Rig 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &993738160
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993738159}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.03, y: -0.163, z: 2.678}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8379979449485654032}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &993738161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993738159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b342d8ce5c2fd48b8fa3147d48d1d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Weight: 1
+  m_Effectors: []
 --- !u!1 &1029902456
 GameObject:
   m_ObjectHideFlags: 0
@@ -4078,6 +4124,7 @@ Transform:
   m_Children:
   - {fileID: 4043097931453307012}
   - {fileID: 4156938655434375127}
+  - {fileID: 993738160}
   m_Father: {fileID: 1339455033}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &8563025094844829588
@@ -4186,6 +4233,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8379979449485654032}
   - component: {fileID: 9151448882223915691}
+  - component: {fileID: 9151448882223915692}
+  - component: {fileID: 9151448882223915693}
   m_Layer: 0
   m_Name: character_main
   m_TagString: Untagged
@@ -4215,6 +4264,71 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &9151448882223915692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9151448882223915690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fff0960ef4ea6e04eac66b4a7fd2189d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RigLayers:
+  - m_Rig: {fileID: 993738161}
+    m_Active: 1
+  m_Effectors: []
+--- !u!114 &9151448882223915693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9151448882223915690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2d8418b0b9634b1892b0268dd9c2743, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boneShape: 1
+  drawBones: 1
+  drawTripods: 0
+  boneSize: 1
+  tripodSize: 1
+  boneColor: {r: 0, g: 0, b: 1, a: 0.5}
+  m_Transforms:
+  - {fileID: 1519494278050816258}
+  - {fileID: 3025705657752193592}
+  - {fileID: 2566131967539170499}
+  - {fileID: 8563025094844829588}
+  - {fileID: 5933310829854105359}
+  - {fileID: 3003168829663593449}
+  - {fileID: 1296402595015042662}
+  - {fileID: 5784165077126160888}
+  - {fileID: 1224892312142199078}
+  - {fileID: 6005974692744741322}
+  - {fileID: 3048249395595849557}
+  - {fileID: 7041053315216135191}
+  - {fileID: 1847768318568788915}
+  - {fileID: 1575714319800811968}
+  - {fileID: 9194118619219639141}
+  - {fileID: 188704765046665147}
+  - {fileID: 4594736359380422945}
+  - {fileID: 8912662142200953223}
+  - {fileID: 6609223953307404627}
+  - {fileID: 4043097931453307012}
+  - {fileID: 4355827406274980631}
+  - {fileID: 2460997423228480147}
+  - {fileID: 828230466610163325}
+  - {fileID: 7164872419334946815}
+  - {fileID: 2343183918127563006}
+  - {fileID: 5787773670528608851}
+  - {fileID: 7670966476580118579}
+  - {fileID: 208373096171100509}
+  - {fileID: 4624832016302450672}
+  - {fileID: 3854074927564788921}
 --- !u!4 &9194118619219639141
 Transform:
   m_ObjectHideFlags: 0
