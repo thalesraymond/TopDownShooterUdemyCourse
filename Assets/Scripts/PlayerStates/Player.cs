@@ -1,4 +1,5 @@
-﻿using Inputs;
+﻿using System.Linq;
+using Inputs;
 using ScriptableObjects;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -34,6 +35,9 @@ namespace PlayerStates
         [SerializeField] public LayerMask aimLayerMask;
 
         [SerializeField] private Transform aimCrosshair;
+        
+        [SerializeField] private Transform leftHandWeaponTransform;
+
         
         protected PlayerStateMachine StateMachine { get; private set; }
 
@@ -107,6 +111,17 @@ namespace PlayerStates
                 
                 this.currentWeapon = weaponEntity;
                 this.currentWeapon.gameObject.SetActive(true);
+                
+                var leftHandTransform = currentWeapon.gameObject.GetComponentsInChildren<Transform>()
+                    .FirstOrDefault(weaponComponent => weaponComponent.CompareTag("LeftHandWeaponTransform"));
+
+                if (!leftHandTransform)
+                {
+                    Debug.LogError("LeftHandWeaponTransform not found");
+                    return;
+                }
+
+                this.leftHandWeaponTransform.localPosition = leftHandTransform.localPosition;
             }
         }
     }

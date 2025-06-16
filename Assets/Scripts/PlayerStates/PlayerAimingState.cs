@@ -29,10 +29,6 @@ namespace PlayerStates
             this.AimDirection.Normalize();
 
             this.Player.transform.forward = this.AimDirection;
-            
-            Debug.Log("Player Position: " + this.Player.transform.position);
-            
-            Debug.Log("Aim Position: " + new Vector3(hitInfo.point.x, this.Player.transform.position.y + DefaultAimYValue, hitInfo.point.z));
 
             this.Player.UpdateAimCrosshairPosition(new Vector3(hitInfo.point.x, this.Player.transform.position.y + DefaultAimYValue, hitInfo.point.z));
         }
