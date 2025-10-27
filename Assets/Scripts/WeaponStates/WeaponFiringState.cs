@@ -20,9 +20,9 @@ namespace WeaponStates
         public override void Update()
         {
             base.Update();
-            
+
             this.Player.CurrentWeapon.Fire();
-            
+
         }
     }
 }

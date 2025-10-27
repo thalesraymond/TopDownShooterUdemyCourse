@@ -2290,7 +2290,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: 27a8f35d101bfcae18d4a161c2d01770, type: 2}
-  currentAmmo: 0
+  currentAmmo: 100
 --- !u!33 &740466223962493317
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3472,7 +3472,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: be57ba5bf983e63c0ac6007675c64a25, type: 2}
-  currentAmmo: 0
+  currentAmmo: 100
 --- !u!1 &4910727911784524419
 GameObject:
   m_ObjectHideFlags: 0
@@ -3552,7 +3552,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: 7f2c9d68813d5644cb2007c986b46033, type: 2}
-  currentAmmo: 0
+  currentAmmo: 100
 --- !u!137 &5239593864704396116
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -4121,7 +4121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: 23b51203f165d7c86bb7c915c08df59d, type: 2}
-  currentAmmo: 0
+  currentAmmo: 100
 --- !u!4 &7041053315216135191
 Transform:
   m_ObjectHideFlags: 0
@@ -4250,7 +4250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponData: {fileID: 11400000, guid: 1c05af707b79eed81a27dcff0c72697f, type: 2}
-  currentAmmo: 0
+  currentAmmo: 100
 --- !u!1 &7383788455102772032
 GameObject:
   m_ObjectHideFlags: 0
