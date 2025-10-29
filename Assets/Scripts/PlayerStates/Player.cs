@@ -102,7 +102,7 @@ namespace PlayerStates
             {
                 this._animator.SetLayerWeight(i, 0);
             }
-
+            
             this._animator.SetLayerWeight(layerIndex, 1);
         }
 
