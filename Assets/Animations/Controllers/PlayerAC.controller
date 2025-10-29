@@ -32,7 +32,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Firing Shotgun Idle
+  m_Name: Weapon Idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -83,7 +83,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Firing Shotgun Fire
+  m_Name: Weapon Fire
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -137,7 +137,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Auto Rifle Idle
+  m_Name: Weapon Idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -344,13 +344,19 @@ AnimatorController:
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
   - serializedVersion: 5
-    m_Name: Shoktgun Weapon Layer
+    m_Name: Shotgun Weapon Layer
     m_StateMachine: {fileID: 2854551516855980772}
     m_Mask: {fileID: 0}
-    m_Motions: []
+    m_Motions:
+    - serializedVersion: 2
+      m_State: {fileID: 2460873048140753187}
+      m_Motion: {fileID: -203655887218126122, guid: 68bde463686f3691b9cfdcf7c4644d2b, type: 3}
+    - serializedVersion: 2
+      m_State: {fileID: -4285252478218354729}
+      m_Motion: {fileID: -203655887218126122, guid: 938451d7e198a70438497ce642e21e71, type: 3}
     m_Behaviours: []
     m_BlendingMode: 0
-    m_SyncedLayerIndex: -1
+    m_SyncedLayerIndex: 1
     m_DefaultWeight: 0
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
@@ -359,10 +365,16 @@ AnimatorController:
     m_Name: Precision Rifle Weapon Layer
     m_StateMachine: {fileID: -2285791803023085538}
     m_Mask: {fileID: 0}
-    m_Motions: []
+    m_Motions:
+    - serializedVersion: 2
+      m_State: {fileID: 2460873048140753187}
+      m_Motion: {fileID: -203655887218126122, guid: b83519b8ceed55d42a28e2b37572a876, type: 3}
+    - serializedVersion: 2
+      m_State: {fileID: -4285252478218354729}
+      m_Motion: {fileID: -203655887218126122, guid: 9ae08135235107394897360923cb8b0b, type: 3}
     m_Behaviours: []
     m_BlendingMode: 0
-    m_SyncedLayerIndex: -1
+    m_SyncedLayerIndex: 1
     m_DefaultWeight: 0
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
@@ -443,7 +455,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Auto Rifle Fire
+  m_Name: Weapon Fire
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -495,7 +507,7 @@ AnimatorStateMachine:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shoktgun Weapon Layer
+  m_Name: Shotgun Weapon Layer
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -5419490113702413806}
