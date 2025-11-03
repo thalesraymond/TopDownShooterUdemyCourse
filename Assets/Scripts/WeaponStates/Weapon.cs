@@ -29,7 +29,8 @@ namespace WeaponStates
 
             this.StateMachine = new WeaponStateMachine(
                 new WeaponIdleState(this._player),
-                new WeaponFiringState(this._player)
+                new WeaponFiringState(this._player),
+                new WeaponReloadState(this._player)
             );
         }
 
@@ -41,6 +42,11 @@ namespace WeaponStates
         public bool CanShoot()
         {
             return this.HasAmmo();
+        }
+
+        public bool CanReload()
+        {
+            return this.weaponData.MagazineSize < this.CurrentAmmo ;
         }
 
         public bool HasAmmo()

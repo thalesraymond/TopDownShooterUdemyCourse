@@ -1,31 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using Inputs;
+using PlayerStates;
 using UnityEngine;
 
-namespace PlayerStates
+namespace WeaponStates
 {
-    public class PlayerShootingState : PlayerState
+    public class WeaponReloadState : WeaponState
     {
-        public PlayerShootingState(Player player) : base(player)
+        public WeaponReloadState(Player player) : base(player)
         {
         }
 
         protected override List<Type> ConflictingStates => new()
         {
-            typeof(PlayerReloadingState)
+            typeof(WeaponFiringState)
         };
 
         public override bool CanActivate()
         {
-            return InputManager.Instance.IsTryingToShoot && this.Player.CurrentWeapon.CanShoot();
+            return !InputManager.Instance.IsTryingToShoot && InputManager.Instance.IsTryingToReload;
         }
 
         public override void Update()
         {
             base.Update();
-            
-            this.Player.TriggerFiringAnimation();
         }
     }
 }

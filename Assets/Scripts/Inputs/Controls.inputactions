@@ -1,4 +1,5 @@
 {
+    "version": 1,
     "name": "Controls",
     "maps": [
         {
@@ -45,6 +46,15 @@
                     "name": "SwitchWeapon",
                     "type": "Button",
                     "id": "2fb1bd3d-839c-4f27-8e6f-4caa74acd206",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Reload",
+                    "type": "Button",
+                    "id": "b7ac8671-6bce-4a88-9b47-e3ed1f498ad3",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -192,6 +202,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "SwitchWeapon",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e8a3d1db-cac6-49fa-9e73-15d43200da67",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Reload",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

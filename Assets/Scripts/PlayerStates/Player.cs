@@ -3,6 +3,7 @@ using Inputs;
 using ScriptableObjects;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 using WeaponStates;
 
 namespace PlayerStates
@@ -13,8 +14,14 @@ namespace PlayerStates
         private static readonly int ZVelocity = Animator.StringToHash("zVelocity");
         private static readonly int IsRunning = Animator.StringToHash("isRunning");
         private static readonly int IsFiring = Animator.StringToHash("isFiring");
+        private static readonly int IsReloading = Animator.StringToHash("isReload");
         public CharacterController CharacterController { get; private set; }
         private Animator _animator;
+
+        [Header("Rig")]
+        [SerializeField] private Rig rig;
+        public Rig Rig => this.rig;
+
 
         [Header("Movement")]
         [SerializeField] private float movementSpeed = 5f;
@@ -49,7 +56,8 @@ namespace PlayerStates
                 new PlayerWalkState(this),
                 new PlayerShootingState(this),
                 new PlayerAimingState(this),
-                new PlayerFallingState(this)
+                new PlayerFallingState(this),
+                new PlayerReloadingState(this)
             );
         }
 
@@ -95,14 +103,19 @@ namespace PlayerStates
         {
             this._animator.SetTrigger(IsFiring);
         }
-        
+
+        public void TriggerReloadingAnimation()
+        {
+            this._animator.SetTrigger(IsReloading);
+        }
+
         public void SwitchAnimationlayer(int layerIndex)
         {
             for (var i = 1; i < this._animator.layerCount; i++)
             {
                 this._animator.SetLayerWeight(i, 0);
             }
-            
+
             this._animator.SetLayerWeight(layerIndex, 1);
         }
 
@@ -120,7 +133,7 @@ namespace PlayerStates
 
                 switch (weaponKey)
                 {
-                    case "4": 
+                    case "4":
                         layer = 2;
                         break;
                     case "5":
@@ -130,7 +143,7 @@ namespace PlayerStates
                         layer = 1;
                         break;
                 }
-                
+
                 this.SwitchAnimationlayer(layer);
 
                 this.currentWeapon = weaponEntity;

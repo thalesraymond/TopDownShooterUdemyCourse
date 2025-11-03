@@ -12,13 +12,15 @@ namespace Inputs
         public Vector2 PlayerMovementValue { get; private set; }
 
         public bool IsTryingToMove { get; private set; }
-        
+
         public bool IsTryingToRun { get; private set; }
-        
+
         public bool IsTryingToShoot { get; private set; }
 
+        public bool IsTryingToReload { get; private set; }
+
         public Vector2 PlayerAimValue { get; private set; }
-        
+
         public Action<string> SwitchCurrentWeaponAction { get; set; }
 
         private void Awake()
@@ -52,8 +54,15 @@ namespace Inputs
             this.HandleMovement();
 
             this.HandleAim();
-            
+
             this.HandleFiring();
+
+            this.HandleReloading();
+        }
+
+        private void HandleReloading()
+        {
+            this.IsTryingToReload = this.Controls.Player.Reload.IsPressed();
         }
 
         private void SwitchCurrentWeapon(InputAction.CallbackContext context)
@@ -66,7 +75,7 @@ namespace Inputs
             this.PlayerMovementValue = this.Controls.Player.Movement.ReadValue<Vector2>();
 
             this.IsTryingToMove = this.PlayerMovementValue.magnitude > 0;
-            
+
             this.IsTryingToRun = this.Controls.Player.Run.IsPressed();
         }
 
