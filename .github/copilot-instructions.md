@@ -7,6 +7,7 @@ This is a **Top-Down Shooter** built with **Unity 6 (6000.0.60f1)** using **C# 9
 ## Architecture
 
 ### State Machine Pattern
+
 The project uses a custom **concurrent state machine** where multiple states can be active simultaneously (e.g., aiming + walking + falling). Each state declares `ConflictingStates` to prevent incompatible combinations.
 
 - `PlayerStateMachine` / `WeaponStateMachine` — manage a `HashSet` of active states
@@ -14,18 +15,22 @@ The project uses a custom **concurrent state machine** where multiple states can
 - States are activated/deactivated each frame based on conditions and conflict resolution
 
 When adding new states:
+
 1. Inherit from `PlayerState` or `WeaponState`
 2. Define `ConflictingStates` to declare mutual exclusions
 3. Implement `CanActivate()` with the entry condition
 4. Register the new state in `Player.cs` or `Weapon.cs` constructors
 
 ### Entity Hierarchy
+
 `Entity` (MonoBehaviour) → `Player`, `Weapon`
 
 ### Data-Driven Design
+
 Weapon stats are defined via **ScriptableObjects** (`WeaponData` extends `ItemData`). New weapons are authored as `.asset` files under `Assets/Scripts/ScriptableObjects/WeaponDatas/`. Always prefer ScriptableObjects for configuration data over hardcoded values.
 
 ### Input Management
+
 `InputManager` is a **singleton** wrapping the auto-generated `Controls` class from the New Input System. All input queries go through `InputManager.Instance`. Never read input directly from `UnityEngine.Input` — always use the InputManager.
 
 ## Project Structure
@@ -74,6 +79,7 @@ Assets/
 ## Coding Conventions
 
 ### Naming
+
 - **PascalCase** for public fields, properties, methods, and classes
 - **camelCase** for private/local variables
 - **Prefix private fields** with lowercase (e.g., `player`, `weapon`) — no underscore prefix used in this project
@@ -81,6 +87,7 @@ Assets/
 - **ScriptableObjects** follow `<Type>Data` pattern (e.g., `WeaponData`, `ItemData`)
 
 ### Code Style
+
 - Use `[SerializeField]` for inspector-exposed private fields; avoid public fields
 - Use C# properties with `{ get; private set; }` for read-only external access
 - Cache component references in `Awake()` or via constructor injection
@@ -89,6 +96,7 @@ Assets/
 - Prefer coroutines (`IEnumerator` + `StartCoroutine`) for time-delayed gameplay logic (e.g., fire rate)
 
 ### Unity Patterns
+
 - **One MonoBehaviour per file**, file name matches class name
 - Components are retrieved via `GetComponent<T>()` / `GetComponentInChildren<T>()` in `Awake()`
 - Gravity is applied manually via `CharacterController.Move()` — not using Rigidbody physics
@@ -98,6 +106,7 @@ Assets/
 ## Unity & Game Dev Best Practices
 
 ### Performance
+
 - **Avoid `Find()` calls at runtime** — cache references in `Awake()` or `Start()`, or assign via Inspector
 - **Use object pooling** for bullets, particles, and frequently spawned/despawned objects instead of `Instantiate`/`Destroy`
 - **Minimize per-frame allocations** — avoid `new` in `Update()`, use structs, pre-allocate collections
@@ -109,6 +118,7 @@ Assets/
 - **Use `NonAlloc` physics APIs** (`RaycastNonAlloc`, `OverlapSphereNonAlloc`) for zero-allocation queries
 
 ### Architecture
+
 - **Prefer composition over inheritance** — attach behavior via components, not deep class hierarchies
 - **Use ScriptableObjects for data** — weapon stats, enemy configs, level settings, ability definitions
 - **Separate data from logic** — SO holds values, MonoBehaviour holds behavior
@@ -118,52 +128,61 @@ Assets/
 - **Avoid singletons when possible** — if needed, use the pattern sparingly and only for true global services (InputManager, AudioManager)
 
 ### State Machines
+
 - When a state grows complex, consider sub-states or nested state machines
 - Always handle edge cases in `CanActivate()` — e.g., can't shoot while reloading
 - Keep `Enter()` / `Exit()` symmetric — anything enabled in `Enter()` must be disabled in `Exit()`
 - Log state transitions during development for debugging: `Debug.Log($"Enter: {GetType().Name}")`
 
 ### Input System
+
 - **Never modify `Controls.cs`** — it is auto-generated from `Controls.inputactions`
 - Add new actions in the `.inputactions` asset, then regenerate
 - Bind input reading in the InputManager; states check InputManager properties
 
 ### Animation
+
 - Use **Animator Layers** with **Avatar Masks** for blending upper/lower body
 - Keep blend trees clean — use 2D Freeform Directional for 8-direction movement
 - Use **Animation Events** or **StateMachineBehaviours** to trigger gameplay logic at precise animation frames
 - Avoid hard-coding animation clip lengths — query `AnimatorStateInfo.normalizedTime` or use events
 
 ### Physics & Movement
+
 - Use `CharacterController` for player movement in top-down games — simpler than Rigidbody for this genre
 - Apply gravity manually each frame when using CharacterController
 - Use `FixedUpdate()` for Rigidbody physics, `Update()` for CharacterController movement
 - Multiply movement by `Time.deltaTime` for frame-rate independence
 
 ### ScriptableObjects
+
 - Create via `[CreateAssetMenu(fileName = "...", menuName = "...")]`
 - Store them in organized folders (e.g., `WeaponDatas/`, `EnemyDatas/`)
 - Never store runtime mutable state in SOs during play — they persist changes in the editor
 - Use SOs for shared config: damage tables, loot tables, dialog data, audio configs
 
 ### Scene Management
+
 - Keep scenes modular — separate gameplay, UI, and environment into additive scenes when the project grows
 - Use prefabs for reusable objects; avoid duplicating GameObjects across scenes
 - Organize hierarchy with empty GameObjects as folders (e.g., `--- Environment ---`, `--- UI ---`)
 
 ### Version Control (Git)
+
 - Never commit `Library/`, `Temp/`, `Logs/`, or `obj/` folders (already gitignored)
 - Commit `.meta` files — they track asset GUIDs and import settings
 - Use **Visible Meta Files** and **Force Text** serialization (already configured)
 - Avoid merging `.unity` scene files — coordinate scene ownership or use additive scenes
 
 ### Debugging & Testing
+
 - Use `Debug.DrawRay()` and `Debug.DrawLine()` to visualize raycasts and directions in Scene view
 - Use `#if UNITY_EDITOR` guards for editor-only debug code
 - Implement `OnDrawGizmos()` / `OnDrawGizmosSelected()` for visual debugging of ranges, spawn zones, etc.
 - Consider Play Mode tests for core systems (state machine transitions, weapon firing logic)
 
 ### Common Pitfalls
+
 - **Don't use `Destroy()` on pooled objects** — deactivate with `SetActive(false)` instead
 - **Don't access destroyed objects** — null-check or use the `?` operator (`component?.Method()`)
 - **Beware of execution order** — use `Awake()` for self-init, `Start()` for cross-references, or set Script Execution Order
@@ -174,6 +193,7 @@ Assets/
 ## File Generation Guidelines
 
 When generating new files for this project:
+
 - Place scripts in the appropriate subfolder under `Assets/Scripts/`
 - New state classes go under `PlayerStates/` or `WeaponStates/`
 - New ScriptableObjects go under `ScriptableObjects/`
